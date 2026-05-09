@@ -1,6 +1,10 @@
-# Inventory Backend API
+# Inventory
 
-Laravel backend API for inventory, purchasing, sales, and warehouse operations with role-based access control.
+Laravel backend API for inventory, purchasing, sales, and warehouse operations with role-based access control, plus a separate frontend asset pipeline.
+
+## Repository Structure
+- `backend/` - Laravel API application
+- `frontend/` - Vite + Tailwind frontend assets
 
 ## Features
 - Sanctum authentication with token-based login/logout
@@ -15,14 +19,32 @@ Laravel backend API for inventory, purchasing, sales, and warehouse operations w
 - PHP 8.3+
 - Composer
 - MySQL or PostgreSQL
+- Node.js + npm
 
-## Setup
+## Backend Setup
 ```bash
+cd backend
 composer install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate
 php artisan db:seed
+```
+
+## Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend build outputs to `backend/public/build`.
+
+## Local Development
+After installing frontend dependencies, you can run the combined workflow from the backend:
+```bash
+cd backend
+composer run dev
 ```
 
 If you hit GitHub API rate limiting during `composer install`, configure a GitHub token for Composer:
