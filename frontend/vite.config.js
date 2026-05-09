@@ -7,6 +7,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
+            publicDirectory: '../backend/public',
             refresh: true,
             fonts: [
                 bunny('Instrument Sans', {
@@ -18,7 +19,7 @@ export default defineConfig({
     ],
     server: {
         watch: {
-            ignored: ['**/storage/framework/views/**'],
+            ignored: ['../backend/storage/framework/views/**'],
         },
     },
 });
