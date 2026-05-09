@@ -15,7 +15,9 @@ class ApiController extends Controller
         array $searchable = [],
         array $sortable = []
     ): Builder {
-        if ($search = $request->get('search')) {
+        $search = trim((string) $request->get('search', ''));
+        if ($search !== '') {
+            $search = addcslashes(mb_substr($search, 0, 100), '%_');
             $query->where(function (Builder $builder) use ($search, $searchable) {
                 foreach ($searchable as $field) {
                     $builder->orWhere($field, 'like', "%{$search}%");

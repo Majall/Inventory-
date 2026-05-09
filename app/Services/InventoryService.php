@@ -144,12 +144,8 @@ class InventoryService
             return;
         }
 
-        $users = User::role(['admin', 'manager'])->get();
-
-        if ($users->isEmpty()) {
-            return;
-        }
-
-        Notification::send($users, new LowStockNotification($product, $inventory->warehouse, (float) $inventory->quantity));
+        User::role(['admin', 'manager'])->chunkById(100, function ($users) use ($product, $inventory) {
+            Notification::send($users, new LowStockNotification($product, $inventory->warehouse, (float) $inventory->quantity));
+        });
     }
 }
