@@ -130,7 +130,8 @@ const bindFormValidation = () => {
             return false;
         }
         if (field === 'expiry_date' && value) {
-            const selectedDate = new Date(value);
+            const [year, month, day] = value.split('-').map(Number);
+            const selectedDate = new Date(year, month - 1, day);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             if (Number.isNaN(selectedDate.getTime()) || selectedDate < today) {
